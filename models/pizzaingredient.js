@@ -1,7 +1,7 @@
 // models/pizzaIngredient.js
 
 const { DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const sequelize = require('../db/db');
 const Pizza = require('./pizza');
 const Ingredient = require('./ingredient');
 

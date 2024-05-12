@@ -1,8 +1,9 @@
 // models/ingredient.js
 
 const { DataTypes } = require('sequelize');
-const sequelize = require('./index');
-const PizzaIngredient = require('./pizzaIngredient');
+const sequelize = require('../db/db');
+const PizzaIngredient = require('./pizzaingredient');
+const Pizza = require('./pizza');
 
 const Ingredient = sequelize.define('Ingredient', {
     name: {
@@ -16,7 +17,7 @@ const Ingredient = sequelize.define('Ingredient', {
     }
 });
 
-Ingredient.belongsToMany(Pizza, { through: PizzaIngredient });
+// Ingredient.belongsToMany(Pizza, { through: PizzaIngredient });
 
 
 module.exports = Ingredient;
