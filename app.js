@@ -1,23 +1,15 @@
-const { Sequelize } = require('sequelize');
-const dotenv = require('dotenv');
+const express = require('express');
+const sequelize = require('./db/db'); // Import sequelize instance from db.js
+const authRouter = require('./routes/authRouter');
 
-// Load environment variables from .env file
-dotenv.config();
+const app = express();
 
-// Create Sequelize instance and connect to MySQL database
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: 'mysql'
+// Use authRouter for user authentication endpoints
+app.use('/api/auth', authRouter);
+
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-
-// Test the database connection
-(async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Connected to MySQL database');
-    } catch (error) {
-        console.error('Error connecting to MySQL database:', error.message);
-    }
-})();
-
-module.exports = sequelize;
